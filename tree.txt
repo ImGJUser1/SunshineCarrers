@@ -1,0 +1,65 @@
+├── .firebase
+    ├── hosting.ZGlzdA.cache
+├── .qodo
+    ├── agents
+    ├── workflows
+├── components
+    ├── AdminCMS.tsx
+    ├── AdminControlPanel.tsx
+    ├── ContentManager.tsx
+    ├── DynamicPage.tsx
+    ├── Layout.tsx
+    ├── Modules.tsx
+    ├── ui.tsx
+├── dist
+    ├── assets
+        ├── hero_bg.mp4
+        ├── index-S0RkWqp4.js
+        ├── logo.png
+        ├── logo_footer.png
+    ├── index.html
+├── functions
+    ├── lib
+        ├── index.js
+        ├── index.js.map
+    ├── src
+        ├── index.ts
+    ├── .eslintrc.js
+    ├── .gitignore
+    ├── package-lock.json
+    ├── package.json
+    ├── tsconfig.dev.json
+    ├── tsconfig.json
+├── public
+    ├── assets
+        ├── hero_bg.mp4
+        ├── logo.png
+        ├── logo_footer.png
+├── services
+    ├── adminRoute.tsx
+    ├── adminService.ts
+    ├── authContext.ts
+    ├── firebase.ts
+    ├── freelanceServices.ts
+    ├── geminiService.ts
+    ├── jobService.ts
+    ├── learningService.ts
+    ├── protectedRoute.tsx
+├── .env.local
+├── .firebaserc
+├── .gitignore
+├── App.tsx
+├── constants.ts
+├── env.d.ts
+├── firebase.json
+├── index.html
+├── index.tsx
+├── metadata.json
+├── package-lock.json
+├── package.json
+├── README.md
+├── tailwond.config.css
+├── tree.txt
+├── tsconfig.json
+├── types.ts
+├── vite.config.ts
