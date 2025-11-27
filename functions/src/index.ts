@@ -11,7 +11,7 @@ import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
 import {getFirestore} from "firebase-admin/firestore";
 import {getStorage} from "firebase-admin/storage";
-import ExcelJS from "exceljs";
+const ExcelJS = require("exceljs");
 import { Readable } from "stream";
 
 // Initialize Firebase Admin
@@ -184,10 +184,11 @@ export const importJobsFromExcel = onCall(async (request) => {
     await workbook.xlsx.load(buffer as any);
     const worksheet = workbook.worksheets[0];
     const jobs: Record<string, unknown>[] = [];
-    worksheet.eachRow((row, rowNumber) => {
+    worksheet.eachRow((row: any, rowNumber: number) => {
+
       if (rowNumber === 1) return; // Skip header
       const rowData: Record<string, unknown> = {};
-      row.eachCell((cell, colNumber) => {
+      row.eachCell((cell: any, colNumber: number) => {
         const headerValue = worksheet.getRow(1).getCell(colNumber).value;
         if (headerValue !== null && headerValue !== undefined) {
           rowData[headerValue.toString()] = cell.value;
@@ -595,10 +596,10 @@ export const bulkImportContent = onCall(async (request) => {
     const stream = Readable.from(csvText);
     const worksheet = await workbook.csv.read(stream);
     const items: Record<string, any>[] = [];
-    worksheet.eachRow((row, rowNumber) => {
+    worksheet.eachRow((row: any, rowNumber: number) => {
       if (rowNumber === 1) return; // Skip header
       const rowData: Record<string, any> = {};
-      row.eachCell((cell, colNumber) => {
+      row.eachCell((cell: any, colNumber: number) => {
         const headerValue = worksheet.getRow(1).getCell(colNumber).value;
         if (headerValue !== null && headerValue !== undefined) {
           rowData[headerValue.toString()] = cell.value;
@@ -749,4 +750,16 @@ export const adminDeleteStorage = onCall(async (request) => {
     logger.error("adminDeleteStorage error:", error);
     throw error;
   }
+});
+// TEMPORARY: Set admin claim for a user
+export const setAdminClaim = onCall(async (request) => {
+  const { uid } = request.data;
+
+  if (!uid) {
+    throw new Error("UID is required");
+  }
+
+  await admin.auth().setCustomUserClaims(uid, { role: "admin" });
+
+  return { success: true, uid };
 });
